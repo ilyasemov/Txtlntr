@@ -1,50 +1,48 @@
 #include <iostream>
 #include <getopt.h>
-
 using namespace std;
-
 int main(int argc, char *argv[])
 {
-
-	{ if (argc==1)
+	 if (argc==1)
     {
-        cout<<"КАЛЬКУЛЯТОР"<< endl<< "Чтобы выбрать действие, нужно ввести один из параметров:" << endl<< "-s — cложение всех введенных значений" << endl << "-m — вычетание первого значения из всех последующий введенных значений"<< endl << "Для того чтобы продолжить запустите программу еще раз с нужным параметром и введите значения через пробел"<< endl;
+        cout<<"Чтобы посчитать произведение, введите параметр -u"<<endl;
+        cout<<"Чтобы посчитать частное, введите параметр -d"<<endl;
     }        
-
-	int opt, i, result = 0, x, b ,t;
-	while ((opt = getopt (argc, argv, "m:s:")) != -1)
+	int opt, i, res = 1, x,t;
+    int b, y, res2 = 1;
+	while ((opt = getopt (argc, argv, "u:d:")) != -1)
         {
             switch (opt)
             {
-                case 's':
+                case 'u':
         			for(i = 0; i<argc; i++)
         			{
-            				cout<< i << ": "<< argv[i] << endl;
+            				cout<<argv[i]<<endl;
         			}			
         			for(i=2; i<argc; i++)
         			{
-            			x = strtol(argv[i], NULL, 10);
-            			result=result + x;
+            			x = strtol(argv[i], NULL, 0);
+            			res=res * x;
         			}
-        		cout<< "Результат: "<< result<<endl;
+        		cout<<res<<endl;
                	break;
                	
-               	case 'm':
+               	case 'd':
     				for(i = 0; i<argc; i++)
    			 		{
-        				cout<< i << ": "<< argv[i] << endl;
+        				cout<< argv[i] << endl;
     				}	
     				b = 0;
-    				for(i=2; i<argc; i++)
+    				for(i=3; i<argc; i++)
     				{
-       					x = strtol(argv[i], NULL, 10);
-          				t = strtol(argv[2], NULL, 10);
-        				result=result + x;
-        				b=result - t*2;
+       					x = strtol(argv[i], NULL, 0);
+          				t = strtol(argv[2], NULL, 0);
+        				res2=res2 * x;
     				}
-    			cout<< "Результат: "<< b <<endl;
+                    b=t/res2;
+                    y=t%res2;
+    			cout<< b <<'.'<< y<<endl;
                 break;       
             }
         }
-    }
 }
